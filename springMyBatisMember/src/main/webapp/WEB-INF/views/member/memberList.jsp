@@ -192,6 +192,19 @@ h2 {
 
 		<h2>소중한 회원 목록</h2>
 		
+		<div class="search-container">
+			<form action="/member/search" method="get" class="search-form">
+				<select name="searchType" class="search-select">
+					<option value="id"
+						${param.searchType == 'id' ? 'selected' : ''}>ID</option>
+					<option value="name"
+						${param.searchType == 'name' ? 'selected' : ''}>NAME</option>
+				</select> <input type="text" name="keyword" class="search-input"
+					placeholder="Search story..." value="${param.keyword}">
+				<button type="submit" class="btn-search">SEARCH</button>
+			</form>
+		</div>
+		
 		<table class="bbo-table">
 			<thead>
 				<tr>
