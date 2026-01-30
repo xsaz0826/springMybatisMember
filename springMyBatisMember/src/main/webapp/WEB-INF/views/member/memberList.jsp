@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>BOARD | 귀여운 게시판 🎀</title>
+<title>회원 목록 페이지</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Gothic:wght@400;700&display=swap"
 	rel="stylesheet">
@@ -53,10 +53,10 @@ h2 {
 	width: 100%;
 }
 
-/* 🎀 검색창 디자인 (T1 형식을 뽀짝하게 변경) */
+/* 🎀 검색창 디자인 */
 .search-container {
 	display: flex;
-	justify-content: flex-end; /* T1 코드처럼 우측 정렬 */
+	justify-content: flex-end; 
 	margin-bottom: 20px;
 }
 
@@ -190,52 +190,39 @@ h2 {
 		<span class="deco-icon" style="top: 20px; left: 20px;">🍓</span> <span
 			class="deco-icon" style="top: 20px; right: 20px;">🧸</span>
 
-		<h2>소중한 게시글 목록</h2>
-
-		<div class="search-container">
-			<form action="/board/search" method="get" class="search-form">
-				<select name="searchType" class="search-select">
-					<option value="title"
-						${param.searchType == 'title' ? 'selected' : ''}>TITLE</option>
-					<option value="writer"
-						${param.searchType == 'writer' ? 'selected' : ''}>WRITER</option>
-					<option value="content"
-						${param.searchType == 'content' ? 'selected' : ''}>CONTENT</option>
-				</select> <input type="text" name="keyword" class="search-input"
-					placeholder="Search story..." value="${param.keyword}">
-				<button type="submit" class="btn-search">SEARCH</button>
-			</form>
-		</div>
-
+		<h2>소중한 회원 목록</h2>
+		
 		<table class="bbo-table">
 			<thead>
 				<tr>
-					<th width="10%">No</th>
-					<th width="50%">Title</th>
-					<th width="20%">Writer</th>
-					<th width="20%">Date</th>
+					<th width="10%">NO</th>
+					<th width="20%">ID</th>
+					<th width="20%">PW</th>
+					<th width="20%">NAME</th>
+					<th width="30%">REGDATE</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${not empty boardList}">
-						<c:forEach var="board" items="${boardList}">
-							<tr onclick="location.href='/board/detail?no=${board.no}'">
-								<td>${board.no}</td>
-								<td style="text-align: left; padding-left: 20px;"><a
-									href="/board/detail?no=${board.no}" class="title-link"> <c:out
-											value="${board.title}" />
+					<c:when test="${not empty memberList}">
+						<c:forEach var="member" items="${memberList}">
+							<tr onclick="location.href='/member/detail?no=${member.no}'">
+								<td>${member.no}</td>
+								<td style="text-align: center; vertical-align: middle;"><a
+									href="/member/detail?no=${member.no}" class="title-link"> <c:out
+											value="${member.id}" />
 								</a></td>
-								<td>${board.writer}</td>
-								<td><fmt:formatDate value="${board.regDate}"
+								<td>${member.pw}</td>
+								<td>${member.name}</td>
+								<td><fmt:formatDate value="${member.regDate}"
 										pattern="yy.MM.dd" /></td>
 							</tr>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="4" style="padding: 50px; color: #888;">아직 등록된
-								이야기가 없어요.. ( ˃̣̣̥᷄⌓˂̣̣̥᷅ )</td>
+							<td colspan="5" style="padding: 50px; color: #888;">아직 등록된
+								회원이 없어요.. ( ˃̣̣̥᷄⌓˂̣̣̥᷅ )</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
@@ -243,8 +230,8 @@ h2 {
 		</table>
 
 		<div class="btn-box">
-			<a href="/board/boardList" class="btn-write">✏️ 새로고침</a>
-			<a href="/board/insertForm" class="btn-write">✏️ 게시판 입력</a>
+			<a href="/member/memberList" class="btn-write">✏️ 회원리스트</a>
+			<a href="/member/insertForm" class="btn-write">✏️ 회원가입</a>
 		</div>
 
 		<div class="footer-msg">💌 [ SYSTEM: CONNECTED TO

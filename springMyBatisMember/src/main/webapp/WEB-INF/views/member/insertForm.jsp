@@ -152,9 +152,6 @@ textarea.input-box {
 			<label class="form-label">이름</label> <input type="text" id="name"
 				name="name" class="input-box" placeholder="이름을 입력하세요" required>
 
-			<label class="form-label">등록코인</label> <input type="number" id="coin"
-				name="coin" class="input-box" placeholder="숫자만 입력하세요">
-
 			<div class="btn-group">
 				<a href="/member/memberList" class="custom-btn bg-list">📋 회원리스트</a>
     

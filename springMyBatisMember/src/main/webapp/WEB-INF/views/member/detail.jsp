@@ -2,11 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>BOARD | 상세보기 🔍</title>
+<title>MEMBER | 상세보기 🔍</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Gothic:wght@400;700&display=swap"
 	rel="stylesheet">
@@ -43,7 +44,7 @@ body {
 	position: relative;
 }
 
-/* 상단 헤더 영역 - T1의 Header 기능을 계승 */
+/* 상단 헤더 영역 */
 .detail-header {
 	background: var(--main-yellow);
 	padding: 35px 30px;
@@ -78,7 +79,7 @@ body {
 	color: var(--text-color);
 }
 
-/* 본문 영역 - T1의 Content 기능을 계승 */
+/* 본문 영역 */
 .detail-content {
 	padding: 40px 30px;
 	min-height: 250px;
@@ -86,11 +87,11 @@ body {
 	font-size: 17px;
 	white-space: pre-wrap;
 	background-image: radial-gradient(#eee 1px, transparent 1px);
-	/* 뽀짝한 도트 배경 */
+	/* 도트 배경 */
 	background-size: 20px 20px;
 }
 
-/* 하단 버튼 영역 - T1의 btn-area 기능을 계승 */
+/* 하단 버튼 영역 */
 .btn-area {
 	padding: 25px 30px;
 	background: #fdfdfd;
@@ -158,24 +159,45 @@ body {
 
 	<div class="detail-container">
 		<div class="detail-header">
-			<span class="post-no">🎀 게시판번호 ${board.no}</span>
+			<span class="post-no">🎀 회원번호 ${member.no}</span>
 			<h1>
-				<c:out value="${board.title}" />
+				<c:out value="${member.id}" />
 			</h1>
 			<div class="post-info">
-				<span>WRITER: <b>${board.writer}</b></span> <span>DATE: <b><fmt:formatDate
-							value="${board.regDate}" pattern="yyyy.MM.dd HH:mm" /></b></span>
+				<span>name: <b>${member.name}</b></span> <span>DATE: <b><fmt:formatDate
+							value="${member.regDate}" pattern="yyyy.MM.dd HH:mm" /></b></span>
 			</div>
 		</div>
 
-		<div class="detail-content">${board.content}</div>
+		<div class="btn-area">
+			<form:form modelAttribute="member">
+				<form:select path="authList[0].auth" disabled="true">
+					<form:option value="" label="=== 선택해 주세요 ===" />
+					<form:option value="ROLE_USER" label="사용자" />
+					<form:option value="ROLE_MEMBER" label="회원" />
+					<form:option value="ROLE_ADMIN" label="관리자" />
+				</form:select>
+				<form:select path="authList[1].auth" disabled="true">
+					<form:option value="" label="=== 선택해 주세요 ===" />
+					<form:option value="ROLE_USER" label="사용자" />
+					<form:option value="ROLE_MEMBER" label="회원" />
+					<form:option value="ROLE_ADMIN" label="관리자" />
+				</form:select>
+				<form:select path="authList[2].auth" disabled="true">
+					<form:option value="" label="=== 선택해 주세요 ===" />
+					<form:option value="ROLE_USER" label="사용자" />
+					<form:option value="ROLE_MEMBER" label="회원" />
+					<form:option value="ROLE_ADMIN" label="관리자" />
+				</form:select>
+				</form:form>
+		</div>
 
 		<div class="btn-area">
-			<a href="/board/boardList" class="btn btn-list">📋 게시판리스트</a>
+			<a href="/member/memberList" class="btn btn-list">📋 회원리스트</a>
 
 			<div class="btn-group">
-				<a href="/board/updateForm?no=${board.no}" class="btn btn-edit">✏️ 수정하기</a> 
-				<a href="/board/delete?no=${board.no}" class="btn btn-delete"
+				<a href="/member/updateForm?no=${member.no}" class="btn btn-edit">✏️ 수정하기</a> 
+				<a href="/member/delete?no=${member.no}" class="btn btn-delete"
 					onclick="return confirm('정말 삭제하시겠습니까? ( •́ ̯ •̀ )')">🗑️ 삭제하기</a>
 			</div>
 		</div>

@@ -33,7 +33,7 @@
 
 	<update id="update">
 		UPDATE mybatisMember
-		SET name =#{name}
+		SET name =#{name}, pw =#{pw}
 		WHERE no = #{no}
 	</update>
 
